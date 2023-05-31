@@ -1,3 +1,5 @@
+import NewButton from "../../utils/NewButton.js";
+import { pushUrl } from "../../utils/Router.js";
 import { request } from "../../utils/api.js";
 import PostList from "./PostList.js";
 
@@ -5,47 +7,50 @@ import PostList from "./PostList.js";
 function PostPage({ $target }) {
     const $page = document.createElement("div")
     $page.className = 'documentDiv'
-
-    const TEST_DATA = [
-        {
-          "id": 1, // Document id
-          "title": "노션을 만들자", // Document title
-          "documents": [
-            {
-              "id": 2,
-              "title": "블라블라",
-              "documents": [
-                {
-                  "id": 3,
-                  "title": "함냐함냐",
-                  "documents": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": 4,
-          "title": "hello!",
-          "documents": []
-        }
-      ]
-      
     
     const postList = new PostList({ 
-        $target,
-        initialState: TEST_DATA,
+        $target: $page,
+        initialState: [],
+        onAttach: async (id) => {
+          await request('/documents', {
+            method: 'POST',
+            body: JSON.stringify({
+              title: '제목없음',
+              parent: id
+            })
+          })
+
+          this.setState()
+        },
+        onDelete: async (id) => {
+          await request(`/documents/${id}`, {
+            method: 'DELETE'
+          })
+
+          pushUrl('/')
+
+          this.setState()
+        }
      })
 
-    const $newBtn = document.createElement("button")
-    $page.appendChild($newBtn)
-    $newBtn.textContent = "new data"
+    new NewButton({
+      $target: $page,
+      initialState: {
+        text: '+New page',
+        link: 'new',
+        name: 'addNew'
+      }
+    })
 
 
-    this.render = () => {
-        const data = request("/documents")
+    this.setState = async () => {
+      const posts = await request('/documents')
+      postList.setState(posts)
+      
+      this.render()
+    }
 
-        console.log(data)
+    this.render = async () => {
         $target.appendChild($page)
     }
 }

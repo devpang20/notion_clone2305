@@ -1,4 +1,6 @@
-function PostList({ $target, initialState}) {
+import { pushUrl } from "../../utils/Router.js"
+
+function PostList({ $target, initialState, onAttach, onDelete}) {
     const $postList = document.createElement("div")
     $postList.className = 'postList'
     $target.appendChild($postList)
@@ -40,7 +42,7 @@ function PostList({ $target, initialState}) {
             ${this.state
             .map(
                 (post) => `
-                <li class="dataList"data-id="${post.id}">
+                <li class="dataList" data-id="${post.id}">
                 🗒  ${post.title}
                 <button class="addBtn" data-id="${post.id}">
                     +
@@ -59,6 +61,30 @@ function PostList({ $target, initialState}) {
 
     // 최초 한번 시작
     this.render()
+
+
+    $postList.addEventListener('click', (e) => {
+        const { id } = e.target.dataset 
+        const { className }= e.target
+        const $li = e.target.closest('li')
+    
+        switch (className) {
+            case 'addBtn':
+                onAttach(id)
+                break;
+            case 'delBtn':
+                onDelete(id)
+                break;
+            case 'datalist':
+                if ($li) {
+                    const { id } = $li.dataset
+                    pushUrl(`documents/${id}`)
+                }
+                break
+        }
+    })
+
+
 }
 
 export default PostList;
