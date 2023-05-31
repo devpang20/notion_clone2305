@@ -13,6 +13,7 @@ export const request = (url, option = {}) => {
         if (res.ok) {
             return res.json();
         }
+        throw new Error('API 처리 문제')
     } catch (e) {
         console.log(e.message)
     }

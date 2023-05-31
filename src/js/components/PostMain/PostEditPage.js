@@ -44,7 +44,6 @@ function PostEditPage({$target, initialState}) {
             return
         }
 
-        //현재  post id 와 클릭된 id가 다르면 api를 통해서 데이터 바다오는 로직
         if (this.state.postId !== nextState.postId) {
 
             this.state = nextState
