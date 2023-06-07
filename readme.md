@@ -11,4 +11,4 @@
 - [x] 테스트 데이터
 - [x] api 연동
 - [x] SideBar 페이지 구현
-- [ ] Editor 페이지 구현
+- [x] Editor 페이지 구현

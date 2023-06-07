@@ -46,21 +46,25 @@ function PostEditPage({$target, initialState}) {
         if (nextState === undefined) {
             return
         }
-
         if (this.state.postId !== nextState.postId) {
-
             this.state = nextState
 
             if (this.state.postId === 'new') {
                 this.render()
-                editor.setState({title: '', content: ''})
+                editor.setState(post)
             } else {
                 await fetchPost()
             }
             return
         }
+        
+        this.state = nextState
 
         this.render()
+        editor.setState(this.state.post || {
+            title: '',
+            content: ''
+        })
     }
     
 
@@ -74,12 +78,12 @@ function PostEditPage({$target, initialState}) {
 
         if (postId !== 'new') {
             const post = await request(`/documents/${postId}`)
+            console.log(post)
+            this.setState({
+                ...this.state,
+                post
+            })  
         }
-
-        this.setState({
-            ...this.state,
-            post
-        })
     }
 }
 

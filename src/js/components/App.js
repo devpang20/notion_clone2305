@@ -27,7 +27,7 @@ function App({ $target }) {
      })
      
     this.route = () => {
-        const { pathname } =  window.location
+        const { pathname } = window.location
         if (pathname.indexOf('/documents/') === 0) {
             const [, , postId] = pathname.split('/')
             postEditPage.setState({ postId })

@@ -75,10 +75,10 @@ function PostList({ $target, initialState, onAttach, onDelete}) {
             case 'delBtn':
                 onDelete(id)
                 break;
-            case 'datalist':
+            case 'dataList':
                 if ($li) {
                     const { id } = $li.dataset
-                    pushUrl(`documents/${id}`)
+                    pushUrl(`/documents/${id}`)
                 }
                 break
         }
