@@ -23,8 +23,8 @@ function Editor({
             <input type="text" name ="title" class="editorTitle" value="${this.state.title}" placeholder="제목 없음"  autofocous/>
             <textarea name="content" class="editorContent" placeholder="내용을 입력하세요" autofocous>${this.state.content} </textarea>
         `
-        }
         isInitialized = true
+      }
    }
 
    this.render()

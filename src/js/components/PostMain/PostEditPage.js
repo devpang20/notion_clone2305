@@ -15,27 +15,30 @@ function PostEditPage({$target, initialState}) {
         $target: $page,
         initialState: post,
         onEditing: async (post) => {
-            if (this.state.postId === 'new') {
-                const createdPost = await request('documents', {
-                    method: 'POST',
-                    body: JSON.stringify(post)
-                })
-    
-                if (post.content) {
-                    await request(`documents/${createdPost.id}`, {
+            setTimeout(async () => {
+                if (this.state.postId === 'new') {
+                    const createdPost = await request('/documents', {
+                        method: 'POST',
+                        body: JSON.stringify(post)
+                    })
+        
+                    if (post.content) {
+                        await request(`/documents/${createdPost.id}`, {
+                            method: 'PUT',
+                            body: JSON.stringify(post)
+                        })
+                    }
+                    history.replaceState(null, null, `/documents/${createdPost.id}`)
+                    this.setState({
+                        postId: createdPost.id
+                    })
+                } else {
+                    await request(`/documents/${this.state.postId}`, {
                         method: 'PUT',
                         body: JSON.stringify(post)
                     })
                 }
-            } else {
-                await request(`documents/${post.id}`, {
-                    method: 'PUT',
-                    body: JSON.stringify(post)
-                })
-            }
-
-
-
+            }, 500)
         }
     })
 
@@ -56,6 +59,8 @@ function PostEditPage({$target, initialState}) {
             }
             return
         }
+
+        this.render()
     }
     
 

@@ -19,7 +19,6 @@ export default function NewButton({ $target, initialState }) {
 
     $newButton.addEventListener('click', () => {
       const { link }  = this.state
-      console.log(1)
       pushUrl(`/documents/${link}`)
     })
 
