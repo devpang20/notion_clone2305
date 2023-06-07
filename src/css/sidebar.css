@@ -58,7 +58,6 @@ ul {
   }
   
   .addBtn {
-    width: 14px;
     background-color: #f7f6f3;
     border: none;
     background-color: var(--sideBar);
@@ -66,7 +65,6 @@ ul {
   }
   
   .delBtn {
-    width: 5px;
     background-color: #f7f6f3;
     border: none;
     background-color: var(--sideBar);

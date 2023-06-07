@@ -10,7 +10,7 @@ export const initRouter = (onRoute) => {
 }
 export const pushUrl = (nextUrl) => {
     window.dispatchEvent(
-        new CustomEvent('route-chage', {
+        new CustomEvent('route-change', {
             detail: {
                 nextUrl
             },

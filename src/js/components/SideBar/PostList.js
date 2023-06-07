@@ -21,14 +21,14 @@ function PostList({ $target, initialState, onAttach, onDelete}) {
             if (data[key].documents.length) {
               str += `<li class="dataList" data-id="${data[key].id}">${data[key].title}
                         <button class="addBtn" data-id="${data[key].id}">+</button>
-                        <button class="delBtn" data-id="${data[key].id}"><i class="fas fa-trash-alt"></i></button>
+                        <button class="delBtn" data-id="${data[key].id}">X</button>
                         <ul>${this.createTreeView(data[key].documents)}</ul>
                       </li>`
             } else {
               str += `<li class="dataList" data-id="${data[key].id}">
                         ${data[key].title}
                        <button class="addBtn" data-id="${data[key].id}">+</button>
-                       <button class="delBtn" data-id="${data[key].id}"><i class="fas fa-trash-alt"></i></button>
+                       <button class="delBtn" data-id="${data[key].id}">X</button>
                       </li>`
             }
           }
@@ -48,7 +48,7 @@ function PostList({ $target, initialState, onAttach, onDelete}) {
                     +
                 </button>
                 <button class="delBtn" data-id="${post.id}">
-                    <i class="fas fa-trash-alt"></i>
+                    X
                 </button>
                 </li>
                 ${post.documents ? `<ul>${this.createTreeView(post.documents)}</ul>` : ''}
@@ -87,4 +87,4 @@ function PostList({ $target, initialState, onAttach, onDelete}) {
 
 }
 
-export default PostList;
+export default PostList;  
